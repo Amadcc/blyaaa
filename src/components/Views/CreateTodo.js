@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addTodo } from "../Actions/ToDoActions";
-import { bindActionCreators } from "redux";
-
+import withTasks from "../withTasks";
 class CreateTodo extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +38,7 @@ class CreateTodo extends Component {
           <button
             type="button"
             onClick={() => {
-              this.props.addTodo(this.state.todotext);
+			 this.props.handleCreatingTask(this.state.todotext);
               this.setState({ todotext: "" });
             }}
             style={{ marginTop: "25px" }}
@@ -55,16 +52,4 @@ class CreateTodo extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      addTodo
-    },
-    dispatch
-  );
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(CreateTodo);
+export default withTasks(CreateTodo);
